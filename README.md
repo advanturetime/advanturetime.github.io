@@ -5,4 +5,3 @@
 <img src="https://img.shields.io/badge/React-61dafb?style=flat-square&logo=React&logoColor=black" />&nbsp;
 <img src="https://img.shields.io/badge/Vue-4fc08d?style=flat-square&logo=Vue.js&logoColor=white" />&nbsp; <img src="https://img.shields.io/badge/jQeury-0769ad?style=flat-square&logo=jQuery&logoColor=white" />&nbsp; <img src="https://img.shields.io/badge/Bootstrap-7952b3?style=flat-square&logo=Bootstrap&logoColor=white" />&nbsp; <img src="https://img.shields.io/badge/Sass-cc6698?style=flat-square&logo=Sass&logoColor=white" />&nbsp;
 </div>
-구현하였습니다.
