@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <link rel="shortcut icon" href="/image/card_game/card_game.ico">
+    <link rel="icon" href="/image/card_game/card_game.ico">
+    <link rel="stylesheet" href="/css/card_game/card_game.css">
+    <script src="/js/card_game.js"></script>
+</head>
+<body>
+    <div class="card_wrap">
+        <h2><span id="minutes">00</span>:<span id="seconds">00</span>:<span id="tenMillis">00</span></h2>
+
+        <h3>카드를 뒤집어 짝을 맞추세요</h2>
+
+        <!-- 첫째줄 -->
+        <div class="first_line">
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 둘째줄 -->
+        <div class="second_line">
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card_inner">
+                    <div class="card_front"></div>
+                    <div class="card_back"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="celebrate" id="celebrate">
+        <div class="celebrate_inner">
+            <i class="flag"><img src="/image/card_game/celebrate.png" alt="축하깃발"></i>
+            
+            <div class="result">
+                <p>축하합니다!<br><span id="gameFinish"></span><br>걸렸습니다.</p>
+                <i id="refreshBtn" class="refresh"><img src="/image/card_game/refresh.png" alt="다시시작"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

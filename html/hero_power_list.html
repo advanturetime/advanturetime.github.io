@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Power List</title>
+    <link rel="shortcut icon" href="/image/hero_power_list/hero_power_list.ico">
+    <link rel="icon" href="/image/hero_power_list/hero_power_list.ico">
+    <link rel="stylesheet" href="/css/hero_poser_list/hero_power_list.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/font.css">
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.12.0/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.11.0/umd/react-dom.development.js"></script>
+<script type="text/babel">
+
+    const { useState, useEffect, useRef, useCallback, useMemo, Fragment } = React;
+    
+    // CrudContainer
+    function CrudContainer(props) {
+
+        const [items, setItems] = useState([
+            { id: 1, name: "슈퍼맨", power: 100 },
+            { id: 2, name: "아쿠아맨", power: 300 },
+            { id: 3, name: "스파이더맨", power: 500 },
+            { id: 4, name: "배트맨", power: 30 },
+        ]);
+
+        const callbackDel = useCallback((id) => {
+            const newItems = items.filter((item) => {
+                return item.id !== id;
+            });
+            setItems(newItems)
+        }, [items]);
+
+        const callbackUp = useCallback((id) => {
+            const newItems = items.map((item) => {
+                if (item.id === id) {
+                    item.power = item.power + 100;
+                }
+                return item;
+            });
+            setItems(newItems)
+        }, [items]);
+
+        const callbackDown = useCallback((id) => {
+            const newItems = items.map((item) => {
+                if (item.id === id) {
+                    item.power = item.power - 50;
+                }
+                return item;
+            });
+            setItems(newItems)
+        }, [items]);
+
+        const callbackSave = useCallback((newitem) => {
+            const newItems = items.map((item) => {
+                if (item.id === newitem.id) {
+                    return newitem
+                }
+                return item;
+            });
+            setItems(newItems)
+        }, [items]);
+
+        const callbackAdd = useCallback((param) => {
+            let maxid = 0;
+            if (items && items.length > 0) {
+                maxid = items.map((item) => item.id)
+                    .reduce((pval, cval) => (pval > cval ? pval : cval), 0)
+            }
+            else {
+                maxid = 0;
+            }
+
+            const newid = maxid + 1;
+            param.id = newid;
+
+            setItems([...items, param]);
+        }, [items]);
+
+        return (
+            <div id="app">
+                <h1>Hero Power List</h1>
+                <CrudInput callbackAdd={callbackAdd}></CrudInput>
+                <CrudList
+                    {...props}
+                    items={items}
+                    callbackDel={callbackDel}
+                    callbackUp={callbackUp}
+                    callbackDown={callbackDown}
+                    callbackSave={callbackSave}
+                ></CrudList>
+            </div>
+        )
+    }
+
+    // CrudInput
+    function CrudInput(props) {
+
+        const refInputName = useRef(null);
+        const refInputPower = useRef(null);
+
+        const refIsMounted = useRef(false);
+        useEffect(() => {
+            if (refIsMounted.current) {
+                console.log();
+            }
+            else {
+                refIsMounted.current = true;
+                refInputName.current.focus();
+            }
+        });
+
+        const handlerAdd = (event) => {
+
+            // Name 유효성 검사
+            if (!refInputName.current.value) {
+                alert("이름을 입력하세요");
+                refInputName.current.focus();
+
+                // 이벤트취소
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            }
+
+            // Power 유효성 검사
+            if (!refInputPower.current.value) {
+                alert("파워를 입력하세요");
+                refInputPower.current.focus();
+
+                // 이벤트취소
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            }
+
+            const newitem = {
+                name: refInputName.current.value,
+                power: Number(refInputPower.current.value),
+            }
+            props.callbackAdd(newitem);
+
+            // input 태그에 남아있는 입력값 지우기.
+            refInputName.current.value = '';
+            refInputPower.current.value = null;
+        };
+
+        return (
+            <div className="input_wrap">
+                <div className="input_left">
+                    <div className="inputs">
+                        <label htmlFor="">Name&nbsp; &nbsp;:</label>
+                        <input type="text" name="name" placeholder="이름을 입력하세요" defaultValue={""} ref={refInputName} />
+                    </div>
+                    <div className="inputs">
+                        <label htmlFor="">Power&nbsp;&nbsp;:</label>
+                        <input type="number" name="power" placeholder="숫자를 입력하세요" defaultValue={0} ref={refInputPower} />
+                    </div>
+                </div>
+                <button className="input_right" type="button" onClick={handlerAdd}>Add</button>
+            </div>
+        )
+    }
+
+    // CrudList
+    function CrudList(props) {
+        const { items, callbackDel, callbackUp, callbackDown, callbackSave } = props; //items === crudContainer.items
+
+        const arrs = items && items.length && items.map((item) => {
+            return (
+                <CrudListItem
+                    key={item.id}
+                    item={item}
+                    callbackDel={callbackDel}
+                    callbackUp={callbackUp}
+                    callbackDown={callbackDown}
+                    callbackSave={callbackSave}
+                ></CrudListItem>
+            );
+        });
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>POWER</th>
+                        <th>BUTTON</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {arrs}
+                </tbody>
+            </table>
+        )
+    }
+
+    // CrudListItem
+    function CrudListItem(props) {
+
+        const { item, callbackDel, callbackUp, callbackDown, callbackSave } = props;
+
+        const refInputName = useRef(null);
+        const refInputPower = useRef(null);
+
+        const [isEditMode, setIsEditMode] = useState(false);
+
+        const handlerDel = (event) => {
+            const id = item.id;
+            props.callbackDel(id);
+        };
+
+        const handlerUp = (event) => {
+            const id = item.id;
+            props.callbackUp(id);
+        };
+
+        const handlerDown = (event) => {
+            const id = item.id;
+            props.callbackDown(id);
+        };
+
+        const handlerEdit = () => {
+            setIsEditMode(!isEditMode);
+        };
+
+        const handlerSave = (event) => {
+            setIsEditMode(!isEditMode);
+
+            // Name 유효성 검사
+            if (!refInputName.current.value) {
+                alert("이름을 입력하세요");
+
+                // 포커스 설정
+                refInputName.current.focus();
+
+                // 이벤트취소
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            }
+
+            // Power 유효성 검사
+            if (!refInputPower.current.value) {
+                alert("파워를 입력하세요");
+
+                // 포커스 설정
+                refInputPower.current.focus();
+
+                // 이벤트취소
+                event.stopPropagation();
+                event.preventDefault();
+                return false;
+            }
+
+            const newitem = {
+                id: item.id,
+                name: refInputName.current.value,
+                power: Number(refInputPower.current.value),
+            }
+
+            props.callbackSave(newitem);
+        };
+
+        const formView = (
+            <tr>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.power}</td>
+                <td>
+                    <button type="button" onClick={handlerDel}>Del</button>
+                    <button type="button" onClick={handlerUp}>Power Up</button>
+                    <button type="button" onClick={handlerDown}>Power Down</button>
+                    <button type="button" onClick={handlerEdit}>Edit</button>
+                </td>
+            </tr>
+        )
+
+        const formEdit = (
+            <tr>
+                <td>{item.id}</td>
+                <td>
+                    <input
+                        type="text"
+                        name="name"
+                        ref={refInputName}
+                        defaultValue={item.name}
+                    />
+                </td>
+                <td>
+                    <input
+                        type="number"
+                        name="power"
+                        ref={refInputPower}
+                        defaultValue={item.power}
+                    />
+                </td>
+                <td>
+                    <button type="button" onClick={handlerUp}>Power Up</button>
+                    <button type="button" onClick={handlerDown}>Power Down</button>
+                    <button type="button" onClick={handlerSave}>Save</button>
+                </td>
+            </tr>
+        )
+
+        if (isEditMode)
+            return formEdit;
+        else
+            return formView;
+
+    }
+    
+    ReactDOM.render(
+        <CrudContainer></CrudContainer>
+        ,
+        document.getElementById('app')
+    );
+</script>

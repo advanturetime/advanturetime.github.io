@@ -1,0 +1,141 @@
+@import url('/css/common.css');
+@import url('/css/font.css');
+
+body{
+    text-align: center;
+    background-color: #29323c;
+    .theater_bg {
+        width: 100%;
+        height: 30%;
+        opacity: 0.8;
+        filter: opacity(0.5);
+        background-image: linear-gradient(0deg, rgba(41,50,60,1) 0%, rgba(41,50,60,0) 100%) ,url('/image/movie_reservation/movie_reservation_bg.jpg');
+        background-repeat: no-repeat, no-repeat;
+        background-position: center, center 28%;
+        background-size: cover, cover;
+    }
+    .theater_wrap{
+        margin: 0 auto;
+        max-width: 280px;
+        > p {
+            color: #fff;
+            font-size: 20px;
+            font-weight: normal;
+        }
+        > span {
+            color: rgba(255,255,255,0.5);
+            > i {
+                color: #f0b20f;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: bold;
+            }
+        }
+        .showcase {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            margin-top: 20px;   
+            li {
+                color: #a7a7a7;
+                font-size: 14px;
+                line-height: 1;
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    margin-right: 10px;
+                    width : 13px;
+                    height: 13px;
+                    vertical-align: -1px;
+                    background: #e6e6e6;
+                    border-radius: 50%;
+                }
+                &:nth-child(2)::before {background: #ff7878;}
+                &:last-child::before {background: #5f69ff;}
+                & + li {margin-left: 15px;}
+            }
+        }
+        .container {
+            display: inline-block;
+            margin-top: 15px;
+            .screen_wrap{
+                position: relative;
+                perspective: 1000px;
+                > * {
+                    display: inline-block;
+                    margin: 0 auto 20px;
+                    height: 70px;
+                    width: 200px;
+                }
+                .screen {
+                    position: relative;
+                    z-index: 1;
+                    transform: rotateX(-50deg);
+                    background-color: #fff;
+                    box-shadow: 0 3px 10px rgba(255, 255, 255, 70%);
+                    @keyframes blink-effect {50% {opacity: 0;}};
+                    animation: blink-effect 5s step-end infinite;
+                }
+                .screen_back{
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%) rotateX(-50deg);
+                    background-color: rgba(0,0,0,0.5);
+                }
+            }
+            .row {
+                .seat {
+                    display: inline-block;
+                    color: #6e6e6e;
+                    transition: color 200ms;
+                    i {
+                        width: 20px;
+                        height: 20px;    
+                        font-size: 20px;
+                    }
+                    &.booked {color: #ff7878;}
+                    &.selection {color: #5f69ff;}
+                    &:nth-child(2) {margin-right: 20px;}
+                    &:nth-last-child(2) {margin-left: 20px;}
+                }
+            }
+        }
+        .text {
+            display: flex;
+            justify-content: center;
+            margin: 30px auto 0;
+            padding: 5px 10px;
+            width: 90%;
+            color: #29323c;
+            font-weight: bold;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background: rgba(255, 255, 255, 0.5);
+            .ticket {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-basis: 35%;
+                font-size: 15px;
+                i {color: #5f69ff;}
+            }
+            .total_price {
+                margin-right: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: end;
+                flex-basis: 65%;
+                span {
+                    display: inline-block;
+                    &:first-child {
+                        margin-right: 15px;
+                        color: rgba(255, 255, 255, 0.7);
+                        font-size: 10px;
+                        text-align: right;
+                    }
+                    &:last-child {font-size: 18px;}
+                }
+            }
+        }
+    }
+}

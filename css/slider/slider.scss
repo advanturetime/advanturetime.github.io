@@ -1,0 +1,89 @@
+@import url('/css/common.css');
+
+$liWidth : 380px;
+$liHeight : 380px;
+
+#sliderWrap {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    .slider_inner {
+        position: relative;
+        margin: 0 auto;
+        width: 1200px;
+        height: 100vh;
+        .img_slider {
+            li {
+                position: absolute;
+                display: none;
+                width: $liWidth;
+                height: $liHeight;
+                transition: all 500ms ease;
+                figure {
+                    position: relative;
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 10px;
+                    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                    transition: all 500ms ease;
+                    -webkit-box-reflect: below 20px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(60%, transparent) , to(rgba(250, 250, 250, 0.3)));
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        border-radius: 10px;
+                    }
+                }
+                &.active{
+                    display: block;
+                    top : calc(50% - #{$liHeight/2});
+                    left: calc(50% - #{$liWidth/2});
+                    z-index: 999;
+                }
+                &.next{
+                    display: block;
+                    top: calc(50% - #{$liHeight/2});
+                    left: calc(48% + #{($liWidth/2) * 0.7});
+                    z-index: 99;
+                    figure {transform: scale(0.7);}
+                }
+                &.after_next{
+                    display: block;
+                    top: calc(50% - #{$liHeight/2});
+                    left: calc(46% + (#{$liWidth} * 0.7 + #{($liWidth/2) * 0.5}));
+                    z-index: 9;
+                    figure {transform: scale(0.5);}
+                }
+                &.prev{
+                    display: block;
+                    top: calc(50% - #{$liHeight/2});
+                    left: calc(52% - #{($liWidth/2) * 0.7 + $liWidth});
+                    z-index: 99;
+                    figure {transform: scale(0.7);}
+                }
+                &.before_prev{
+                    display: block;
+                    top: calc(50% - #{$liHeight/2});
+                    left: calc(54% - (#{($liWidth/2) * 0.5} + #{($liWidth) * 0.7} + #{$liWidth}));
+                    z-index: 9;
+                    figure {transform: scale(0.5);}
+                }
+            }
+        }
+
+        .btn_area {
+            button {
+                position: absolute;
+                top: calc(50% - 40px);
+                z-index: 99;  
+                width: 70px;
+                height: 70px;
+                border: none;
+                background: none;
+                i {font-size: 40px;}
+            }
+            .prev_btn {left: -200px;}
+            .next_btn {right: -200px;}
+        }
+    }
+}

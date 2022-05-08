@@ -1,0 +1,132 @@
+@import url('/css/common.css');
+@import url('/css/font.css');
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdf0e0;
+    .card_wrap {
+        position: relative;
+        padding: 50px;
+        min-width: 1100px;
+        height: auto;
+        box-sizing: border-box;
+        h2, h3{
+            position: absolute;
+            color: rgba(0,0,0,0.5);
+            font-weight: normal;
+            font-family: 'Black Han Sans', sans-serif;
+            transform: rotate(90deg);
+        }
+        h2 {
+            top: 105px;
+            right: -42px;
+            font-size: 30px;
+        }
+        h3 {
+            right: -100px;
+            bottom: 170px;
+            font-size: 22px;
+        }
+        .first_line, .second_line {
+            display: inline-flex;
+            width: 100%;
+        }
+        .second_line {margin-top: 15px;}
+        .card {
+            width : 20%;
+            perspective: 1000px;
+            .card_inner {
+                position: relative;
+                width: 100%;
+                height: 330px;
+                transition: transform 0.8s;
+                transform-style: preserve-3d;
+                > div {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    border-radius: 10px;
+                }
+                .card_front {
+                    z-index: 1;
+                    background-image: url('/image/card_game/card_front.jpg');
+                }
+                .card_back {transform: rotateY(180deg);}
+            }
+            +.card {margin-left: 15px;}
+            &.flipped .card_inner {
+                transform: rotateY(180deg);
+                .card_front {display: none;}
+            }
+            &.shake {
+                animation: shake 1800ms 1 linear both;
+                animation-delay: 500ms;
+                @keyframes shake{
+                    0%, 50% {transform: rotate(0deg);}
+                    5%, 15%, 25%, 35%, 45% {transform: rotate(3deg);}
+                    10%, 20%, 30%, 40% {transform: rotate(-3deg);}
+                }
+            }
+        }
+    }
+    .celebrate{
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s linear 300ms, opacity 300ms;
+        &.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .celebrate_inner{
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: rgba(255,255,255,0.9);
+            i img {width: 100%}
+            .flag {
+                display: block;
+                max-width: 650px;
+                height: fit-content;
+            }
+            .result {
+                margin-top: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                p {
+                    display: inline-block;
+                    color: rgba(0,0,0,0.5);
+                    font-size: 50px;
+                    font-family: 'Black Han Sans';
+                    > span {color: #df6f46;}
+                }
+                .refresh {
+                    display: inline-block;
+                    margin-left: 70px;
+                    padding: 25px;
+                    width: 10%;
+                    height: auto;
+                    background: #fff;
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                    filter: opacity(.5) drop-shadow(0 0 0 gray);
+                    &:hover{
+                        animation: rotateImage 2s linear infinite;
+                        @keyframes rotateImage {100% {transform: rotate(360deg);}}
+                    }
+                }
+            }
+        }
+    }    
+}

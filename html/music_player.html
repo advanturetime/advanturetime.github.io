@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Music Player</title>
+    <link rel="shortcut icon" href="/image/music_player/music_player.ico">
+    <link rel="icon" href="/image/music_player/music_player.ico">
+    <link rel="stylesheet" href="/css/music_player/music_player.css">
+    <script src="/js/music_player.js"></script>
+</head>
+<body>
+    <div class="music_wrap">
+        <h1>Music Player</h1>
+
+        <div class="img_container">
+            <i class="img_turntable"></i>
+            <i class="img_circle"></i>
+            <img id="imgCover" alt="music_cover">
+        </div>
+
+        <div class="music_container">
+            <audio id="musicAudio"></audio>
+            <p id="musicTitle"></p>
+            <span id="musicSinger"></span>
+            <input id="progressBar" class="progress_bar" type="range" min="0" max="100" value="0">
+        </div>
+
+        <div class="nav_container">
+            <button id="pvevBtn" class="songBtn prev_btn"></button>
+            <button id="playBtn" class="songBtn play_btn"></button>
+            <button id="nextBtn" class="songBtn next_btn" ></button>
+        </div>
+    </div>
+</body>
+</html>

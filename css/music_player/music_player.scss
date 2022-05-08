@@ -1,0 +1,160 @@
+@import url('/css/common.css');
+@import url('/css/font.css');
+
+body {
+    display : flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to top, #6a85b6 0%, #bac8e0 100%);
+    h1 {
+        margin: 20px 0;
+        color: #fff;
+        font-size: 30px;
+        font-weight: normal;
+        font-family: 'Lato', sans-serif;
+        text-align: center;
+    }
+    .music_wrap {
+        .img_container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            width: 210px;
+            height: 210px;
+            img {
+                border-radius: 50%;
+                width: inherit;
+                height: inherit;
+                animation-name: rotate;
+                animation-duration: 3500ms;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-play-state: paused;
+                @keyframes rotate {
+                    from {transform: rotate(0deg);}
+                    to {transform: rotate(360deg);}
+                }
+                &.play {animation-play-state: running;}
+                &.paused {animation-play-state: paused;}
+            }
+            .img_turntable{
+                width: 110px;
+                height: 110px;
+                position: absolute;
+                top: -30px;
+                right: -30px;
+                transform: rotate(-20deg);
+                z-index: 9;
+                opacity: 0;
+                background: url('/image/music_player/turntable.png') no-repeat center;
+                background-size: contain;
+                transition: top 500ms ease-in-out, opacity 500ms ease-in-out;
+            }
+            .img_circle {
+                position: absolute;
+                z-index: 9;
+                width: 12%;
+                height: 12%;
+                border-radius: 50%;
+                background: #fff;
+            }
+            &::before, &::after{
+                content: '';
+                position: absolute;
+                z-index: 9;
+                display: block;
+                border: 2px solid rgba(255, 255, 255, 0.7);
+                border-radius: 50%;
+            }
+            &::before{
+                width: 94%;
+                height: 94%;
+            }
+            &::after{
+                width: 30%;
+                height: 30%;
+            }
+        }
+        .music_container{
+            margin: 20px 0 10px;
+            > * {
+                color: rgba(255, 255, 255, 0.9);
+                text-align: center;
+            }
+            > p {
+                font-size: 25px;
+                font-weight: 600;
+            }
+            > span {
+                display: block;
+                padding-top: 5px;
+                font-size: 15px;
+            }
+            .progress_cont {
+                margin-top: 20px;
+                width: 100%;
+                height: 4px;
+                background: rgba(255,255,255,0.3);
+                cursor: pointer;
+                .progress {
+                    width: 0;
+                    height: 4px;
+                    background: #fff;
+                }
+            }
+            input[type=range] {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                margin-top: 20px;
+                width: 100%;
+                height: 4px;
+                cursor: pointer;
+                background: rgba(255,255,255,0.3);
+                &:focus {outline: none;}
+                &::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background: #fff;
+                    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                }
+            }            
+        }
+        .nav_container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 210px;
+            margin: 10px 30px;
+            button{
+                padding: 10px;
+                border: none;
+                background: none;
+                cursor: pointer;
+                &.play_btn {
+                    width: 60px;
+                    height: 60px;
+                    background-image: url('/image/music_player/play.png');
+                    background-size: 40px 40px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    &.paused {background-image: url('/image/music_player/pause.png');}
+                }
+                &.prev_btn, &.next_btn {
+                    width: 45px;
+                    height: 45px;
+                    background: url('/image/music_player/prev.png') no-repeat center;
+                    background-size: 25px 25px;
+                }
+                &.next_btn {transform: rotate(180deg)}
+            }
+        }
+    }
+}

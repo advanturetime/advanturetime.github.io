@@ -1,0 +1,246 @@
+@import url("/css/common.css");
+@import url("/css/font.css");
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #fdf0e0;
+}
+
+body .card_wrap {
+  position: relative;
+  padding: 50px;
+  min-width: 1100px;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body .card_wrap h2, body .card_wrap h3 {
+  position: absolute;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: normal;
+  font-family: 'Black Han Sans', sans-serif;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+body .card_wrap h2 {
+  top: 105px;
+  right: -42px;
+  font-size: 30px;
+}
+
+body .card_wrap h3 {
+  right: -100px;
+  bottom: 170px;
+  font-size: 22px;
+}
+
+body .card_wrap .first_line, body .card_wrap .second_line {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  width: 100%;
+}
+
+body .card_wrap .second_line {
+  margin-top: 15px;
+}
+
+body .card_wrap .card {
+  width: 20%;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
+body .card_wrap .card .card_inner {
+  position: relative;
+  width: 100%;
+  height: 330px;
+  -webkit-transition: -webkit-transform 0.8s;
+  transition: -webkit-transform 0.8s;
+  transition: transform 0.8s;
+  transition: transform 0.8s, -webkit-transform 0.8s;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+}
+
+body .card_wrap .card .card_inner > div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+body .card_wrap .card .card_inner .card_front {
+  z-index: 1;
+  background-image: url("/image/card_game/card_front.jpg");
+}
+
+body .card_wrap .card .card_inner .card_back {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+body .card_wrap .card + .card {
+  margin-left: 15px;
+}
+
+body .card_wrap .card.flipped .card_inner {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+body .card_wrap .card.flipped .card_inner .card_front {
+  display: none;
+}
+
+body .card_wrap .card.shake {
+  -webkit-animation: shake 1800ms 1 linear both;
+          animation: shake 1800ms 1 linear both;
+  -webkit-animation-delay: 500ms;
+          animation-delay: 500ms;
+}
+
+@-webkit-keyframes shake {
+  0%, 50% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  5%, 15%, 25%, 35%, 45% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  10%, 20%, 30%, 40% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+}
+
+@keyframes shake {
+  0%, 50% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  5%, 15%, 25%, 35%, 45% {
+    -webkit-transform: rotate(3deg);
+            transform: rotate(3deg);
+  }
+  10%, 20%, 30%, 40% {
+    -webkit-transform: rotate(-3deg);
+            transform: rotate(-3deg);
+  }
+}
+
+body .celebrate {
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: visibility 0s linear 300ms, opacity 300ms;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+
+body .celebrate.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+body .celebrate .celebrate_inner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+body .celebrate .celebrate_inner i img {
+  width: 100%;
+}
+
+body .celebrate .celebrate_inner .flag {
+  display: block;
+  max-width: 650px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+body .celebrate .celebrate_inner .result {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body .celebrate .celebrate_inner .result p {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 50px;
+  font-family: 'Black Han Sans';
+}
+
+body .celebrate .celebrate_inner .result p > span {
+  color: #df6f46;
+}
+
+body .celebrate .celebrate_inner .result .refresh {
+  display: inline-block;
+  margin-left: 70px;
+  padding: 25px;
+  width: 10%;
+  height: auto;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-filter: opacity(0.5) drop-shadow(0 0 0 gray);
+          filter: opacity(0.5) drop-shadow(0 0 0 gray);
+}
+
+body .celebrate .celebrate_inner .result .refresh:hover {
+  -webkit-animation: rotateImage 2s linear infinite;
+          animation: rotateImage 2s linear infinite;
+}
+
+@-webkit-keyframes rotateImage {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateImage {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
